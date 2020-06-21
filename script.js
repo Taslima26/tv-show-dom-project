@@ -3,7 +3,7 @@ function setup() {
   const allEpisodes = getAllEpisodes();
   makePageForEpisodes(allEpisodes);
   return allEpisodes;
-  
+
 }
 
 function makePageForEpisodes(episodeList) {
@@ -12,18 +12,20 @@ function makePageForEpisodes(episodeList) {
 
 }
 
-function displayMovies(movies) {
-  const allMoviesDetails = setup();
-  
-  let displayMovie = allMoviesDetails.map(function (item) {
-   
 
-       return `<article class="movie-item">
-             <img src=${item.image.medium} alt=${item.title} class="photo" />
+function displayMovies(movies) {
+  const allEpisodesDetails = setup();
+
+  let displayMovie = allEpisodesDetails.map(function (item) {
+
+
+    return `<article class="movie-item">
+             <img src=${item.image.medium} alt=${item.name} class="photo" />
            <div class="item-info">
                <header>
                  <h4>${item.name}</h4>
-               <h4 class="episode-code">$${item.id}</h4>
+
+               <h4 class="episode-code">${'S0'+item.season.toString()+'E0'+item.number.toString()}</h4>
                </header>
              <p class="item-text">
                 ${item.summary}
@@ -33,9 +35,9 @@ function displayMovies(movies) {
   });
 
   displayMenu = displayMovie.join("");
-   console.log(displayMovie);
+  console.log(displayMovie);
 
-   sectionCenter.innerHTML = displayMovie;
+  sectionCenter.innerHTML = displayMovie;
 }
 
 //window.onload = setup;
