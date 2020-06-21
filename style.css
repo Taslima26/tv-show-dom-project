@@ -149,6 +149,13 @@ main {
   
   place-items: center;
 }
+
+#root{
+
+}
+ a{
+   color
+ }
 /*
 =============== 
 Menu
@@ -161,10 +168,11 @@ Menu
 .title {
   text-align: center;
   margin-bottom: 2rem;
+  margin-top: 2rem;
 }
 .underline {
-  width: 5rem;
-  height: 0.25rem;
+  width: 7rem;
+  height: 0.45rem;
   background: var(--clr-gold);
   margin-left: auto;
   margin-right: auto;
@@ -175,27 +183,33 @@ Menu
   margin: 0 auto;
   max-width: 1170px;
   display: flex;
-  gap: 3rem 2rem;
+  
   justify-items: center;
-  flex-wrap: nowrap;
-  flex-flow: wrap;
+  flex-wrap: wrap;
+  margin-right: -12px;
+  
+  
+  
+  
 }
 
 
 .movie-item{
-
- 
-  gap: 1rem 2rem;
+  
+ margin-right: 12px;
   max-width: 25rem;
-  flex: 0 0 33.3333%;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
+  flex:31.7%;
+  
   }
 .photo {
   object-fit: cover;
   height: 200px;
   border: 0.25rem solid var(--clr-gold);
   border-radius: var(--radius);
-  flex: 0 0 33.3333%;
+  margin-bottom: 2rem;
+  
+ 
   
 
 }
@@ -203,7 +217,7 @@ Menu
   display: flex;
   justify-content: space-between;
   border-bottom: 0.5px dotted var(--clr-grey-5);
-  flex: 0 0 33.3333%;
+  
 
 }
 .item-info h4 {
@@ -226,19 +240,35 @@ Menu
   flex-basis: 33.333333%;
 } */
 
+#root{
+  color: var(--clr-grey-1);
+}
+
+a:link{
+  text-decoration: none;
+}
+
 @media screen and (min-width: 768px) {
   
   .photo {
     height: 175px;
-    flex: 0 0 33.333333%;
+    flex:100%;
+    
+    
   }
 }
 @media screen and (min-width: 1200px) {
   .section-center {
     width: 95vw;
-    grid-template-columns: 1fr 1fr 1fr;
+    
   }
   .photo {
     height: 150px;
   }
+}
+@media screen and  (max-width:640px) {
+    .movie-item {
+        flex-basis: 100%;
+        
+    }
 }

@@ -8,12 +8,18 @@ function setup() {
 
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
-  rootElem.textContent = `Got ${episodeList.length} episode(s)`;
+  //rootElem.textContent = `Got ${episodeList.length} episode(s)`;
+  var a = document.createElement('a');
+  var linkText = document.createTextNode("This data is coming from tvmaze.com,Please click here for more info .Copyrights reserve at @ https://www.tvmaze.com/");
+  a.appendChild(linkText);
+  a.title = "The data is comin from tvmaze.com/api#licensing";
+  a.href = "https://www.tvmaze.com/";
+  rootElem.appendChild(a);
 
 }
 
 
-function displayMovies(movies) {
+function displayMovies() {
   const allEpisodesDetails = setup();
 
   let displayMovie = allEpisodesDetails.map(function (item) {
@@ -34,10 +40,9 @@ function displayMovies(movies) {
           </article>`;
   });
 
-  displayMenu = displayMovie.join("");
-  console.log(displayMovie);
-
-  sectionCenter.innerHTML = displayMovie;
+  displayMenu = displayMovie.join(" ");
+  
+  sectionCenter.innerHTML = displayMenu;
 }
 
 //window.onload = setup;
