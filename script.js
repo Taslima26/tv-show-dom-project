@@ -47,8 +47,10 @@ function makePageForEpisodes(episodeList) {
 
 
 function displayMovies(Movies) {
-
-
+  
+  let totalMovies = Movies.length;
+  let total = document.querySelector(".total")
+  total.textContent = totalMovies;
    let displayMovie = Movies.map((item)=> {
 
 
@@ -76,4 +78,4 @@ function displayMovies(Movies) {
   window.onload = displayMovies;
 
 
-displayMovies();
+
