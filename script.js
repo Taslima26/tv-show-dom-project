@@ -5,7 +5,7 @@ let subtitleHolder = document.querySelector('.episode-code');
 let descriptionHolder = document.querySelector('.item-text');
 let sectionCenter = document.querySelector('.section-center');
 let searchBar = document.querySelector("#searchBar");
-
+let selectEpisodes = document.querySelector("#select-episode");
 
 
 function setup() {
@@ -15,6 +15,12 @@ function setup() {
   return allEpisodes;
 
 }
+
+//Dropdown 
+
+
+
+
 
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
@@ -72,10 +78,31 @@ function displayMovies(Movies) {
      displayMenu = displayMovie.join(" ");
   
      sectionCenter.innerHTML = displayMenu;
-   }
+}
+   
+function selectFromDropdown() {
+  const allEpisodes = getAllEpisodes();
+  for (var i = 0; i < allEpisodes.length; i++) {
+    var opt = 'S0' + allEpisodes[i].season.toString() + 'E0' + allEpisodes[i].number.toString() + '-'+allEpisodes[i].name;
+    console.log(opt);
+    var el = document.createElement("option");
+    el.textContent = opt;
+    el.value = opt;
+    selectEpisodes.appendChild(el);
+    
+  }
+    
+  
+  let selectionOutput = selectEpisodes.value;
+  console.log(selectionOutput);
+}
+    
+ 
+
 
   window.onload = setup;
-  window.onload = displayMovies;
+window.onload = displayMovies;
+selectFromDropdown();
 
 
 

@@ -235,7 +235,7 @@ Menu
 }
 
 #searchBar {
-    width: 45%;
+  /* width: 45%; */
     height: 2.5rem;
     border-radius: 1.9rem;
  
@@ -243,8 +243,20 @@ Menu
     padding: 1.5rem 3rem;
     font-size: 1.25rem;
     margin-bottom: 2rem;
-}
+    margin-top: 2rem;
 
+  }
+#select-episode{
+  
+    height: 2.5rem;
+    border-radius: 1.9rem;
+ 
+    border: 1px solid var(--clr-grey-1);
+    padding: 1.5rem 3rem;
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    margin-top:2rem;
+}
 #searchWrapper {
     position: relative;
 }
