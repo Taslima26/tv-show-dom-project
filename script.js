@@ -6,43 +6,26 @@ let descriptionHolder = document.querySelector('.item-text');
 let sectionCenter = document.querySelector('.section-center');
 let searchBar = document.querySelector("#searchBar");
 let selectEpisodes = document.querySelector("#select-episode");
+let episodesData = [];
 
 
-function setup() {
-  const allEpisodes = getAllEpisodes();
-  makePageForEpisodes(allEpisodes);
-  displayEpisodes(allEpisodes);
-  return allEpisodes;
-
-}
-
-//Dropdown 
-
-
-
-
-
-function makePageForEpisodes(episodeList) {
-  const rootElem = document.getElementById("root");
-  //rootElem.textContent = `Got ${episodeList.length} episode(s)`;
-  var a = document.createElement('a');
-  var linkText = document.createTextNode("This data is coming from tvmaze.com,Please click here for more info .Copyrights reserve at @ https://www.tvmaze.com/");
-  a.appendChild(linkText);
-  a.title = "The data is comin from tvmaze.com/api#licensing";
-  a.href = "https://www.tvmaze.com/";
-  rootElem.appendChild(a);
-
-}
-
-  
  
+const loadCharacters = async () => {
+  try {
+    const res = await fetch('https://api.tvmaze.com/shows/82/episodes');
+    hpCharacters = await res.json();
+    displayEpisodes(episodesData);
+  } catch (err) {
+    console.error(err);
+  }
+};
 
 
-const allEpisodesDetails = setup();
+//const allEpisodesDetails = setup();
 searchBar.addEventListener('keyup', (e) => {
 
   const searchString = e.target.value.toLowerCase();
-  const filteredMovies = allEpisodesDetails.filter((item) => {
+  const filteredMovies = episodesData.filter((item) => {
     return (
       item.name.toLowerCase().includes(searchString) ||
       item.summary.toLowerCase().includes(searchString)
@@ -50,6 +33,7 @@ searchBar.addEventListener('keyup', (e) => {
   });
   displayEpisodes(filteredMovies);
 });
+
 
 
 
@@ -85,7 +69,7 @@ function displayEpisodes(Movies) {
      sectionCenter.innerHTML = displayEpisode;
 }
    
-
+//select box logic 
   getAllEpisodes().forEach((item) => {
   
     let opt = 'S0' + item.season.toString() + 'E0' + item.number.toString() + '-' + item.name;
@@ -96,6 +80,7 @@ function displayEpisodes(Movies) {
     selectEpisodes.appendChild(el);
     
   });
+selectEpisodes.selectedIndex = 1;
   document.querySelector("#select-episode").addEventListener('change', (e) => {
     
     let selectMovie = selectEpisodes.selectedIndex;
@@ -123,14 +108,17 @@ function displayEpisodes(Movies) {
   
 
 
+function makePageForEpisodes(episodeList) {
+  const rootElem = document.getElementById("root");
+  //rootElem.textContent = `Got ${episodeList.length} episode(s)`;
+  var a = document.createElement('a');
+  var linkText = document.createTextNode("This data is coming from tvmaze.com,Please click here for more info .Copyrights reserve at @ https://www.tvmaze.com/");
+  a.appendChild(linkText);
+  a.title = "The data is comin from tvmaze.com/api#licensing";
+  a.href = "https://www.tvmaze.com/";
+  rootElem.appendChild(a);
 
- 
-
-
-window.onload = setup;
-window.onload = displayEpisodes;
-//wdow.onload = selectBoxEpisodes;
-
-
+}
+loadCharacters();
 
 
