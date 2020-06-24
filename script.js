@@ -11,7 +11,7 @@ let selectEpisodes = document.querySelector("#select-episode");
 function setup() {
   const allEpisodes = getAllEpisodes();
   makePageForEpisodes(allEpisodes);
-  displayMovies(allEpisodes);
+  displayEpisodes(allEpisodes);
   return allEpisodes;
 
 }
@@ -34,30 +34,34 @@ function makePageForEpisodes(episodeList) {
 
 }
 
+  
+ 
 
-  const allEpisodesDetails = setup();
-  searchBar.addEventListener('keyup', (e) => {
-    
-    const searchString = e.target.value.toLowerCase();
-    const filteredMovies = allEpisodesDetails.filter((item) =>{
-      return (
-        item.name.toLowerCase().includes(searchString) ||
-        item.summary.toLowerCase().includes(searchString)
-      );
-    });
-     
-    displayMovies(filteredMovies);
+
+const allEpisodesDetails = setup();
+searchBar.addEventListener('keyup', (e) => {
+
+  const searchString = e.target.value.toLowerCase();
+  const filteredMovies = allEpisodesDetails.filter((item) => {
+    return (
+      item.name.toLowerCase().includes(searchString) ||
+      item.summary.toLowerCase().includes(searchString)
+    );
   });
+  displayEpisodes(filteredMovies);
+});
+
+
+
+function displayEpisodes(Movies) {
   
+ 
 
-
-
-function displayMovies(Movies) {
-  
   let totalMovies = Movies.length;
   let total = document.querySelector(".total")
   total.textContent = totalMovies;
-   let displayMovie = Movies.map((item)=> {
+ 
+   let displayEpisode = Movies.map((item)=> {
 
 
       return `<article class="movie-item">
@@ -72,37 +76,61 @@ function displayMovies(Movies) {
                    ${item.summary}
                 </p>
                </div>
+
              </article>`;
      });
 
-     displayMenu = displayMovie.join(" ");
+     displayEpisode = displayEpisode.join(" ");
   
-     sectionCenter.innerHTML = displayMenu;
+     sectionCenter.innerHTML = displayEpisode;
 }
    
-function selectFromDropdown() {
-  const allEpisodes = getAllEpisodes();
-  for (var i = 0; i < allEpisodes.length; i++) {
-    var opt = 'S0' + allEpisodes[i].season.toString() + 'E0' + allEpisodes[i].number.toString() + '-'+allEpisodes[i].name;
-    console.log(opt);
-    var el = document.createElement("option");
+
+  getAllEpisodes().forEach((item) => {
+  
+    let opt = 'S0' + item.season.toString() + 'E0' + item.number.toString() + '-' + item.name;
+    
+    let el = document.createElement("option");
     el.textContent = opt;
     el.value = opt;
     selectEpisodes.appendChild(el);
     
-  }
+  });
+  document.querySelector("#select-episode").addEventListener('change', (e) => {
     
+    let selectMovie = selectEpisodes.selectedIndex;
+    const movies = getAllEpisodes();
+    const selectDisplay = movies[selectMovie];
+    return `<article class="movie-item">
+              <img src=${selectDisplay.image.medium} alt=${selectDisplay.name} class="photo" />
+            <div class="item-info">
+                  <header>
+                    <h4>${selectDisplay.name}</h4>
+
+                  <h4 class="episode-code">${'S0' + selectDisplay.season.toString() + 'E0' + selectDisplay.number.toString()}</h4>
+                  </header>
+                <p class="item-text">
+                   ${selectDisplay.summary}
+                </p>
+               </div>
+
+             </article>`;
+
+  });
   
-  let selectionOutput = selectEpisodes.value;
-  console.log(selectionOutput);
-}
-    
+  
+
+  
+
+
+
  
 
 
-  window.onload = setup;
-window.onload = displayMovies;
-selectFromDropdown();
+window.onload = setup;
+window.onload = displayEpisodes;
+//wdow.onload = selectBoxEpisodes;
+
 
 
 
