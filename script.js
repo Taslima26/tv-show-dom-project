@@ -13,7 +13,8 @@ let episodesData = [];
 const loadCharacters = async () => {
   try {
     const res = await fetch('https://api.tvmaze.com/shows/82/episodes');
-    hpCharacters = await res.json();
+    
+    episodesData = await res.json();
     displayEpisodes(episodesData);
   } catch (err) {
     console.error(err);
@@ -38,9 +39,6 @@ searchBar.addEventListener('keyup', (e) => {
 
 
 function displayEpisodes(Movies) {
-  
- 
-
   let totalMovies = Movies.length;
   let total = document.querySelector(".total")
   total.textContent = totalMovies;
