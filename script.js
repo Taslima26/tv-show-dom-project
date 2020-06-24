@@ -66,38 +66,32 @@ function displayEpisodes(Movies) {
   
      sectionCenter.innerHTML = displayEpisode;
 }
+//create select box
+getAllEpisodes().forEach((item) => {
+
+  let opt = 'S0' + item.season.toString() + 'E0' + item.number.toString() + '-' + item.name;
+
+  let el = document.createElement("option");
+  el.textContent = opt;
+  el.value = opt;
+  selectEpisodes.appendChild(el);
+
+});
    
 //select box logic 
-  getAllEpisodes().forEach((item) => {
   
-    let opt = 'S0' + item.season.toString() + 'E0' + item.number.toString() + '-' + item.name;
-    
-    let el = document.createElement("option");
-    el.textContent = opt;
-    el.value = opt;
-    selectEpisodes.appendChild(el);
-    
-  });
-selectEpisodes.selectedIndex = 1;
+
   document.querySelector("#select-episode").addEventListener('change', (e) => {
+    const selectString = e.target.value;
+    console.log(selectString);
+    const selectedMovies = episodesData.filter((item) => {
+      return (
+        'S0' + item.season.toString() + 'E0' + item.number.toString() + '-' + item.name===selectString
+        
+      );
+    });
+    displayEpisodes(selectedMovies);
     
-    let selectMovie = selectEpisodes.selectedIndex;
-    const movies = getAllEpisodes();
-    const selectDisplay = movies[selectMovie];
-    return `<article class="movie-item">
-              <img src=${selectDisplay.image.medium} alt=${selectDisplay.name} class="photo" />
-            <div class="item-info">
-                  <header>
-                    <h4>${selectDisplay.name}</h4>
-
-                  <h4 class="episode-code">${'S0' + selectDisplay.season.toString() + 'E0' + selectDisplay.number.toString()}</h4>
-                  </header>
-                <p class="item-text">
-                   ${selectDisplay.summary}
-                </p>
-               </div>
-
-             </article>`;
 
   });
   
