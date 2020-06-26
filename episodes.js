@@ -1474,7 +1474,6 @@ function getAllEpisodes() {
       _links: {
         self: {
           href: "http://api.tvmaze.com/episodes/729573",
-          
         },
       },
     },

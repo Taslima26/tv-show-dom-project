@@ -22,6 +22,7 @@ const loadCharacters = async () => {
 };
 
 
+
 //const allEpisodesDetails = setup();
 searchBar.addEventListener('keyup', (e) => {
 
@@ -111,6 +112,12 @@ function makePageForEpisodes(episodeList) {
   rootElem.appendChild(a);
 
 }
+
+function loadShows() {
+  const allShows = getAllShows();
+  console.log(allShows);
+}
+loadShows();
 loadCharacters();
 
 
