@@ -52,11 +52,23 @@ searchBar.addEventListener('keyup', (e) => {
   displayEpisodes(filteredMovies);
 });
 
-function displayShows(...Shows) {
+function displayShows(Shows) {
   let displayShow = Shows.map((item) => {
-    console.log(item);
+    return `<article class='movie-item'>
+            <img src=${item.image.medium} alt=${item.name} class='photo'/>
+            <div class='item-info'>
+            <header>
+            <h4>${item.name}</h4>
+            <h4 class ='episode-code'> ${'S0' + item.id} </h4>
+            </header>
+            <p class='item-text'> ${item.summary}'
+            </p>
+            <div>
+            </article>`;
    
   });
+  displayShow = displayShow.join('');
+  sectionCenter.innerHTML = displayShow;
 }
 
 
@@ -118,6 +130,15 @@ getAllEpisodes().forEach((item) => {
 
 
   });
+
+  //select logic for shows...
+document.querySelector("#select-shows").addEventListener('change', (e) => {
+  const selectString = e.target.value;
+  const selectShows = showsData.filter((item) => {
+    return (item.name = selectString);
+  });
+  displayShows(selectShows);
+})
 
   //event for go back to main page 
 goBackToAllEpisodes.addEventListener('click',(e)=>
