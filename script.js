@@ -6,6 +6,8 @@ let descriptionHolder = document.querySelector('.item-text');
 let sectionCenter = document.querySelector('.section-center');
 let searchBar = document.querySelector("#searchBar");
 let selectEpisodes = document.querySelector("#select-episode");
+let goBackToAllEpisodes = document.querySelector(".go-back-to-all-episodes");
+
 let episodesData = [];
 
 
@@ -92,17 +94,31 @@ getAllEpisodes().forEach((item) => {
       );
     });
     displayEpisodes(selectedMovies);
-    
+  
+
+
+  });
+
+  //event for go back to main page 
+goBackToAllEpisodes.addEventListener('click',(e)=>
+  {
+  loadCharacters();
 
   });
   
+
+
+
+
+  
   
 
   
 
 
-function makePageForEpisodes(episodeList) {
+function makePageForEpisodes() {
   const rootElem = document.getElementById("root");
+ 
   //rootElem.textContent = `Got ${episodeList.length} episode(s)`;
   var a = document.createElement('a');
   var linkText = document.createTextNode("This data is coming from tvmaze.com,Please click here for more info .Copyrights reserve at @ https://www.tvmaze.com/");
@@ -113,11 +129,7 @@ function makePageForEpisodes(episodeList) {
 
 }
 
-function loadShows() {
-  const allShows = getAllShows();
-  console.log(allShows);
-}
-loadShows();
 loadCharacters();
+ makePageForEpisodes()
 
 
