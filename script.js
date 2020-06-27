@@ -7,12 +7,14 @@ let sectionCenter = document.querySelector('.section-center');
 let searchBar = document.querySelector("#searchBar");
 let selectEpisodes = document.querySelector("#select-episode");
 let goBackToAllEpisodes = document.querySelector(".go-back-to-all-episodes");
+let selectShows = document.querySelector("#select-shows")
 
 let episodesData = [];
+let showsData = [];
 
 
  
-const loadCharacters = async () => {
+const loadEpisodes = async () => {
   try {
     const res = await fetch('https://api.tvmaze.com/shows/82/episodes');
     
@@ -22,6 +24,18 @@ const loadCharacters = async () => {
     console.error(err);
   }
 };
+
+const loadShows = async () => {
+  try {
+    const res = await fetch(' https://api.tvmaze.com/shows');
+    showsData = await res.json();
+    
+    return showsData;
+
+  } catch(err){
+    console.log(err);
+  }
+}
 
 
 
@@ -38,6 +52,12 @@ searchBar.addEventListener('keyup', (e) => {
   displayEpisodes(filteredMovies);
 });
 
+function displayShows(...Shows) {
+  let displayShow = Shows.map((item) => {
+    console.log(item);
+   
+  });
+}
 
 
 
@@ -69,7 +89,7 @@ function displayEpisodes(Movies) {
   
      sectionCenter.innerHTML = displayEpisode;
 }
-//create select box
+//create select box for episodes
 getAllEpisodes().forEach((item) => {
 
   let opt = 'S0' + item.season.toString() + 'E0' + item.number.toString() + '-' + item.name;
@@ -102,7 +122,7 @@ getAllEpisodes().forEach((item) => {
   //event for go back to main page 
 goBackToAllEpisodes.addEventListener('click',(e)=>
   {
-  loadCharacters();
+  loadEpisodes();
 
   });
   
@@ -129,7 +149,22 @@ function makePageForEpisodes() {
 
 }
 
-loadCharacters();
- makePageForEpisodes()
 
+ 
+loadEpisodes();
+makePageForEpisodes()
+loadShows();
+
+
+///select shows logic here
+
+getAllShows().forEach((item) => {
+
+  let opt = item.name;
+  let el = document.createElement("option");
+  el.textContent = opt;
+  el.value = opt;
+  selectShows.appendChild(el);
+
+});
 
