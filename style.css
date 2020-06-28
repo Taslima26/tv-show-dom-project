@@ -150,6 +150,11 @@ main {
   
   place-items: center;
 }
+.form-class{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
 
 #root{
 
@@ -392,6 +397,36 @@ a:link{
 @media screen and  (max-width:640px) {
     .movie-item {
         flex-basis: 100%;
+
+        
+    }
+}
+
+@media screen and  (max-width:640px) {
+    .form-class {
+        flex-basis: 100%;
+        
+        
+    }
+}
+
+@media screen and  (max-width:640px) {
+    
+      #select-episode{
+        width:83%;
+        font-size: var(--clr-primary-4);
+        margin-bottom: 0.1rem;
+        
+      }
+        #select-shows{
+          width: 83%;
+          font-size: var(--clr-primary-4);
+          margin-bottom: 0.1rem;
+        }
+        #searchBar{
+          width: 83%;
+          font-size: var(--clr-primary-4);
+        }
         
     }
 }
