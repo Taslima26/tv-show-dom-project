@@ -27,7 +27,9 @@ const loadEpisodes = async () => {
 
 const loadShows = async () => {
   try {
-    const res = await fetch(' https://api.tvmaze.com/shows');
+    const res = await fetch('  http://api.tvmaze.com/shows/1/episodes');
+    //How do I  get show id here  everytime user select item??
+    //Think !!
     showsData = await res.json();
     
     return showsData;
