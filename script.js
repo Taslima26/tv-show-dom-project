@@ -50,9 +50,27 @@ function selectShowsToGetEpisodes() {
       .then((response) => response.json())
       .then((episodesOfShow) => {
         displayShows(episodesOfShow);
+        searchEpisodes(episodesOfShow);
       });
   });
+  
+
+
 }
+function searchEpisodes(episodes) {
+  searchBar.addEventListener('keyup', (e) => {
+
+    const searchString = e.target.value.toLowerCase();
+    const filteredMovies = episodes.filter((item) => {
+      return (
+        item.name.toLowerCase().includes(searchString) ||
+        item.summary.toLowerCase().includes(searchString)
+      );
+    });
+    displayShows(filteredMovies);
+  });
+}
+
 
 
 
@@ -78,10 +96,16 @@ function displayShows(Shows) {
   sectionCenter.innerHTML = displayShow;
 }
 
+//implement the search functionality for the selected shows episodes
+
+  
+
+
 
 selectShowsToGetEpisodes();
 populateShows();
 displayShows();
+searchEpisodes();
 
 
 
