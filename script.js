@@ -118,6 +118,17 @@ searchEpisodes();
 
 
 
+  document.querySelector("#select-episode").addEventListener('change', (e) => {
+    const selectString = e.target.value;
+    console.log(selectString);
+    const selectedMovies = episodesData.filter((item) => {
+      return (
+        'S0' + item.season.toString() + 'E0' + item.number.toString() + '-' + item.name === selectString
+        
+      );
+    });
+    displayEpisodes(selectedMovies);
+  
 
 
 
@@ -138,4 +149,4 @@ searchEpisodes();
 
 
 
-
+});
