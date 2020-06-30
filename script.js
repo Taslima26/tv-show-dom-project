@@ -123,7 +123,7 @@ getAllEpisodes().forEach((item) => {
     console.log(selectString);
     const selectedMovies = episodesData.filter((item) => {
       return (
-        'S0' + item.season.toString() + 'E0' + item.number.toString() + '-' + item.name===selectString
+        'S0' + item.season.toString() + 'E0' + item.number.toString() + '-' + item.name === selectString
         
       );
     });
@@ -190,4 +190,3 @@ getAllShows().forEach((item) => {
   selectShows.appendChild(el);
 
 });
-
