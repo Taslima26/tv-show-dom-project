@@ -13,7 +13,7 @@ let episodesData = [];
 let showsData = [];
 
 
-//1 select input for selection of shows.
+//1 populate selectShows input with shows ..
 
 
 function populateShows() {
@@ -28,7 +28,7 @@ function populateShows() {
   });
 }
 
-///Now I have all the shows so get one show which user selected in select box.
+///Now I have all the shows so need to  get access to  one show which user selected in select box.
 
 function selectShowsToGetEpisodes() {
   document.querySelector("#select-shows").addEventListener('change', (e) => {
@@ -83,8 +83,9 @@ function searchEpisodes(episodes) {
 
 function populateEpisodes(allEpisodes) {
   allEpisodes.forEach((item) => {
-
-    let opt = item.name;
+    
+    let opt = `S0${item.season.toString()}E0${item.number.toString()}-${item.name}`;
+   
     let el = document.createElement("option");
     el.textContent = opt;
     el.value = opt;
@@ -127,7 +128,7 @@ function selectEpisodesToDisplay(episodesData) {
     console.log(selectString);
     const selectedEpisodes = episodesData.filter((item) => {
       return (
-         item.name === selectString
+      `S0${item.season.toString()}E0${item.number.toString()}-${item.name}` === selectString
 
       );
     });
