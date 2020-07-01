@@ -63,6 +63,9 @@ function selectShowsToGetEpisodes() {
 
 //implement the search functionality for the selected shows episodes
 function searchEpisodes(episodes) {
+  let totalEpisodes = episodes.length;
+  let total = document.querySelector(".total-1")
+  total.textContent = totalEpisodes;
   searchBar.addEventListener('keyup', (e) => {
 
     const searchString = e.target.value.toLowerCase();
@@ -93,6 +96,10 @@ function populateEpisodes(allEpisodes) {
 //Now I have all the episodes of corrosponding show ,I need to find a 
 //way to display them.
 function displayShows(allShows) {
+  let EpisodeBeingDisplay = allShows.length;
+  let total = document.querySelector(".total-2")
+  total.textContent = EpisodeBeingDisplay;
+  
   let displayShow = allShows.map((item) => {
     return `<article class='movie-item'>
             <img src=${item.image.medium} alt=${item.name} class='photo'/>
