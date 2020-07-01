@@ -139,6 +139,20 @@ function goBackToAllEpisodesFunction(everyhing){
   })
 }
 
+//footer functionality to give credit to fetch api
+function makePageForEpisodes() {
+const rootElem = document.getElementById("root");
+
+  
+  var a = document.createElement('a');
+  var linkText = document.createTextNode("This data is coming from tvmaze.com,Please click here for more info .Copyrights reserve at @ https://www.tvmaze.com/");
+  a.appendChild(linkText);
+  a.title = "The data is comin from tvmaze.com/api#licensing";
+  a.href = "https://www.tvmaze.com/";
+  rootElem.appendChild(a);
+
+}
+
 
 
 
@@ -156,11 +170,10 @@ function goBackToAllEpisodesFunction(everyhing){
 
 selectShowsToGetEpisodes();
 populateShows();
-displayShows();
 searchEpisodes();
-populateEpisodes();
 selectEpisodesToDisplay();
 goBackToAllEpisodesFunction();
+makePageForEpisodes();
 
 
 
