@@ -84,7 +84,7 @@ function searchEpisodes(episodes) {
 function populateEpisodes(allEpisodes) {
   allEpisodes.forEach((item) => {
     
-    let opt = `S0${item.season.toString()}E0${item.number.toString()}-${item.name}`;
+    let opt = `S${item.season.toString().padStart(2,0)}E${item.number.toString().padStart(2,0)}-${item.name}`;
    
     let el = document.createElement("option");
     el.textContent = opt;
@@ -128,7 +128,7 @@ function selectEpisodesToDisplay(episodesData) {
     console.log(selectString);
     const selectedEpisodes = episodesData.filter((item) => {
       return (
-      `S0${item.season.toString()}E0${item.number.toString()}-${item.name}` === selectString
+      `S${item.season.toString().padStart(2,0)}E${item.number.toString().padStart(2,0)}-${item.name}` === selectString
 
       );
     });
