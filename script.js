@@ -51,12 +51,15 @@ function selectShowsToGetEpisodes() {
       .then((episodesOfShow) => {
         displayShows(episodesOfShow);
         searchEpisodes(episodesOfShow);
+        populateEpisodes(episodesOfShow);
       });
   });
   
 
 
 }
+
+//implement the search functionality for the selected shows episodes
 function searchEpisodes(episodes) {
   searchBar.addEventListener('keyup', (e) => {
 
@@ -70,6 +73,26 @@ function searchEpisodes(episodes) {
     displayShows(filteredMovies);
   });
 }
+
+//populate selectbox with corrosponding epsodes
+
+function populateEpisodes(allEpisodes) {
+  allEpisodes.forEach((item) => {
+
+    let opt = item.name;
+    let el = document.createElement("option");
+    el.textContent = opt;
+    el.value = opt;
+    selectEpisodes.appendChild(el);
+
+  });
+}
+
+
+///Now implement selectBox funionality episode selection;
+
+
+
 
 
 
@@ -96,7 +119,7 @@ function displayShows(Shows) {
   sectionCenter.innerHTML = displayShow;
 }
 
-//implement the search functionality for the selected shows episodes
+
 
   
 
@@ -106,29 +129,7 @@ selectShowsToGetEpisodes();
 populateShows();
 displayShows();
 searchEpisodes();
-
-
-
-
-
-
-
-
-
-
-
-
-  document.querySelector("#select-episode").addEventListener('change', (e) => {
-    const selectString = e.target.value;
-    console.log(selectString);
-    const selectedMovies = episodesData.filter((item) => {
-      return (
-        'S0' + item.season.toString() + 'E0' + item.number.toString() + '-' + item.name === selectString
-        
-      );
-    });
-    displayEpisodes(selectedMovies);
-  
+populateEpisodes();
 
 
 
@@ -142,11 +143,3 @@ searchEpisodes();
 
 
 
-
-
-
-
-
-
-
-});
