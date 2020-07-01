@@ -52,6 +52,8 @@ function selectShowsToGetEpisodes() {
         displayShows(episodesOfShow);
         searchEpisodes(episodesOfShow);
         populateEpisodes(episodesOfShow);
+        selectEpisodesToDisplay(episodesOfShow);
+        goBackToAllEpisodesFunction(episodesOfShow);
       });
   });
   
@@ -88,20 +90,10 @@ function populateEpisodes(allEpisodes) {
   });
 }
 
-
-///Now implement selectBox funionality episode selection;
-
-
-
-
-
-
-
 //Now I have all the episodes of corrosponding show ,I need to find a 
 //way to display them.
-
-function displayShows(Shows) {
-  let displayShow = Shows.map((item) => {
+function displayShows(allShows) {
+  let displayShow = allShows.map((item) => {
     return `<article class='movie-item'>
             <img src=${item.image.medium} alt=${item.name} class='photo'/>
             <div class='item-info'>
@@ -120,18 +112,55 @@ function displayShows(Shows) {
 }
 
 
+///Now implement selectBox funionality episode selection;
+
+function selectEpisodesToDisplay(episodesData) {
+  document.querySelector("#select-episode").addEventListener('change', (e) => {
+    const selectString = e.target.value;
+    console.log(selectString);
+    const selectedEpisodes = episodesData.filter((item) => {
+      return (
+         item.name === selectString
+
+      );
+    });
+    displayShows(selectedEpisodes);
+
+
+
+  });
+  
+}
+
+///Implement go back to all episodes functionality.
+function goBackToAllEpisodesFunction(everyhing){
+  goBackToAllEpisodes.addEventListener('click', () => {
+    displayShows(everyhing);
+  })
+}
+
+
+
+
+
+
+
+
+
 
   
 
 
+
+//****   All function calling functionality  *******/
 
 selectShowsToGetEpisodes();
 populateShows();
 displayShows();
 searchEpisodes();
 populateEpisodes();
-
-
+selectEpisodesToDisplay();
+goBackToAllEpisodesFunction();
 
 
 
