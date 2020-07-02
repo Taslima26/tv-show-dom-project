@@ -49,7 +49,7 @@ function selectShowsToGetEpisodes() {
     fetch(`https://api.tvmaze.com/shows/${idOfShow}/episodes`)
       .then((response) => response.json())
       .then((episodesOfShow) => {
-        displayShows(episodesOfShow);
+        displayEpisodes(episodesOfShow);
         searchEpisodes(episodesOfShow);
         populateEpisodes(episodesOfShow);
         selectEpisodesToDisplay(episodesOfShow);
@@ -75,33 +75,37 @@ function searchEpisodes(episodes) {
         item.summary.toLowerCase().includes(searchString)
       );
     });
-    displayShows(filteredMovies);
+    displayEpisodes(filteredMovies);
   });
 }
 
 //populate selectbox with corrosponding epsodes
 
 function populateEpisodes(allEpisodes) {
-  allEpisodes.forEach((item) => {
+allEpisodes.forEach((item) => {
     
     let opt = `S${item.season.toString().padStart(2,0)}E${item.number.toString().padStart(2,0)}-${item.name}`;
    
-    let el = document.createElement("option");
-    el.textContent = opt;
-    el.value = opt;
-    selectEpisodes.appendChild(el);
+  
+  
+  let element = document.createElement('option')
+    element.textContent = opt;
+    element.value = opt;
+    selectEpisodes.add(element);
 
   });
+ 
+ 
 }
 
 //Now I have all the episodes of corrosponding show ,I need to find a 
 //way to display them.
-function displayShows(allShows) {
+function displayEpisodes(allShows) {
   let EpisodeBeingDisplay = allShows.length;
   let total = document.querySelector(".total-2")
   total.textContent = EpisodeBeingDisplay;
   
-  let displayShow = allShows.map((item) => {
+  let displayEpisode = allShows.map((item) => {
     return `<article class='movie-item'>
             <img src=${item.image.medium} alt=${item.name} class='photo'/>
             <div class='item-info'>
@@ -115,8 +119,8 @@ function displayShows(allShows) {
             </article>`;
 
   });
-  displayShow = displayShow.join('');
-  sectionCenter.innerHTML = displayShow;
+  displayEpisode = displayEpisode.join('');
+  sectionCenter.innerHTML = displayEpisode;
 }
 
 
@@ -132,18 +136,18 @@ function selectEpisodesToDisplay(episodesData) {
 
       );
     });
-    displayShows(selectedEpisodes);
+    displayEpisodes(selectedEpisodes);
 
 
 
   });
-  
+ 
 }
 
 ///Implement go back to all episodes functionality.
-function goBackToAllEpisodesFunction(everyhing){
+function goBackToAllEpisodesFunction(everything){
   goBackToAllEpisodes.addEventListener('click', () => {
-    displayShows(everyhing);
+    displayEpisodes(everything);
   })
 }
 
@@ -182,6 +186,7 @@ searchEpisodes();
 selectEpisodesToDisplay();
 goBackToAllEpisodesFunction();
 makePageForEpisodes();
+populateEpisodes();
 
 
 
