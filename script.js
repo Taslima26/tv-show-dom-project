@@ -14,12 +14,19 @@ let showsData = [];
 
 
 //1 populate selectShows input with shows ..
+//all episodes must be sorted in alphabetical order
+
+
+
+
 
 
 function populateShows() {
-  getAllShows().forEach((item) => {
 
-    let opt = item.name;
+  getAllShows().sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)).forEach((item) => {
+
+    let opt = item.name;;
+   
     let el = document.createElement("option");
     el.textContent = opt;
     el.value = opt;
@@ -27,6 +34,11 @@ function populateShows() {
 
   });
 }
+
+
+//sort the shows
+
+
 
 ///Now I have all the shows so need to  get access to  one show which user selected in select box.
 
@@ -164,6 +176,7 @@ const rootElem = document.getElementById("root");
   rootElem.appendChild(a);
 
 }
+
 
 
 
