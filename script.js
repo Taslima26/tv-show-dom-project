@@ -116,7 +116,7 @@ allEpisodes.forEach((item) => {
 //Now I have all the episodes of corrosponding show ,I need to find a 
 //way to display them.
 function displayEpisodes(allShows) {
-  let EpisodeBeingDisplay = allShows.length;
+  let episodeBeingDisplay = allShows.length;
   let total = document.querySelector(".total-2")
   total.textContent = EpisodeBeingDisplay;
   
@@ -203,7 +203,6 @@ selectEpisodesToDisplay();
 goBackToAllEpisodesFunction();
 makePageForEpisodes();
 populateEpisodes();
-
 
 
 
