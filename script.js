@@ -22,6 +22,8 @@ let showsData = [];
 
 
 function populateShows() {
+  selectShows.options.length = 0;
+  
 
   getAllShows().sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)).forEach((item) => {
 
@@ -94,6 +96,7 @@ function searchEpisodes(episodes) {
 //populate selectbox with corrosponding epsodes
 
 function populateEpisodes(allEpisodes) {
+  selectEpisodes.length = 0;
 allEpisodes.forEach((item) => {
     
     let opt = `S${item.season.toString().padStart(2,0)}E${item.number.toString().padStart(2,0)}-${item.name}`;
@@ -119,7 +122,7 @@ function displayEpisodes(allShows) {
   
   let displayEpisode = allShows.map((item) => {
     return `<article class='movie-item'>
-            <img src=${item.image.medium} alt=${item.name} class='photo'/>
+            <img src=${item.image ? item.image.medium : 'empytyImage'} alt=${item.name} class='photo'/>
             <div class='item-info'>
             <header>
             <h4>${item.name}</h4>
