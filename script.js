@@ -37,12 +37,55 @@ function populateShows() {
   });
 }
 
+///////When my app start I need to display basic informartion about shhow.
+//make a function to display shows and call it when document load.
+//For each show, you must display at least name, image, summary,
+  //genres, status, rating, and runtime.
 
-//sort the shows
+window.onload=function displayShows() {
+  
+
+  let displayEpisode = getAllShows().map((item) => {
+    return `<article class='show-item'>
+           <header>
+            <h4>${item.name}</h4>
+            </header>
+            <div class='show-info flex-box'>
+            <img src=${item.image ? item.image.medium : 'empytyImage'} alt=${item.name} class='show-image flex-box'/>
+            
+
+            
+            <p class='item-text'> ${item.summary}
+            </p>
+            <div class='flex-tag'>
+             <p class='show-rating'> Rated:${item.rating.average}
+            </p>
+            <p class='show-genre'> Genre:${item.genres}
+            </p>
+            <p class='show-status'>Status:${item.status}
+            </p>
+            <p class='show-runtime'>Runtime:${item.runtime}
+            </p>
+           </div>
+            </div>
+            
+            
+            </article>`;
+
+  });
+  displayEpisode = displayEpisode.join('');
+  sectionCenter.innerHTML = displayEpisode;
+}
+
+
+
+
 
 
 
 ///Now I have all the shows so need to  get access to  one show which user selected in select box.
+//sort the shows
+
 
 function selectShowsToGetEpisodes() {
   document.querySelector("#select-shows").addEventListener('change', (e) => {
@@ -68,6 +111,8 @@ function selectShowsToGetEpisodes() {
         populateEpisodes(episodesOfShow);
         selectEpisodesToDisplay(episodesOfShow);
         goBackToAllEpisodesFunction(episodesOfShow);
+        
+        
       });
   });
   

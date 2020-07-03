@@ -213,10 +213,40 @@ main {
   border-radius: var(--radius);
   margin-bottom: 2rem;
   
- 
-  
+ }
 
+.show-image{
+  max-width: 450px;
+  max-height: 300px;
+  border: 0.25rem solid var( --clr-primary-2);
+  border-radius: var(--radius);
+  margin-bottom: 2rem;
 }
+.flex-box{
+  display: flex;
+  
+}
+.show-rating{
+  color: var(--clr-gold);
+}
+
+.show-genre{
+  color:var(--clr-gold);
+}
+ .show-status{
+   color: var(--clear-gold);
+ }
+ .show-runtime{
+color:var(--clear-gold);
+ }
+.flex-tag{
+  /* display: flex;
+  flex-wrap:wrap; */
+  
+  /* background-color: var(--clr-grey-2); */
+  color: var(--clr-gold);
+
+} 
 .photo:hover {
   cursor: pointer;
   box-shadow: 0 0.4rem 1.4rem 0 rgba(86, 185, 235, 0.5);
