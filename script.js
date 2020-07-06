@@ -37,7 +37,7 @@ function populateShows() {
 
   });
 }
-
+populateShows();
 ///////When my app start I need to display basic informartion about shhow.
 //make a function to display shows and call it when document load.
 //For each show, you must display at least name, image, summary,
@@ -53,9 +53,6 @@ window.onload=function displayShows() {
             </header>
             <div class='show-info flex-box'>
             <img src=${item.image ? item.image.medium : 'empytyImage'} alt=${item.name} class='show-image flex-box'/>
-
-
-
             <p class='item-text'> ${item.summary}
             </p>
             <div class='flex-tag'>
@@ -69,6 +66,7 @@ window.onload=function displayShows() {
             </p>
            </div>
             </div>
+            <button class='show-button' id='${item.id}'>Click to see all Episodes:</button>
 
 
             </article>`;
@@ -77,18 +75,24 @@ window.onload=function displayShows() {
   displayEpisode = displayEpisode.join('');
   sectionCenter.innerHTML = displayEpisode;
   getEpisodesForClickedShow()
-}
-;
+};
 
-
+//console.log(document.querySelectorAll('.show-button'));
 function getEpisodesForClickedShow() {
-  document.querySelector('.show-name').addEventListener('click', (e) => {
-    console.log('I am clicked');
-    console.log(e.target.value);
-
-  })
-
+  let allButton = document.querySelectorAll(".show-button");
+  allButton.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      console.log("I am clicked");
+      console.log(e.target.id);
+      selectShowsToGetEpisodes(e.target.id);
+      
+    });
+   
+  });
+ 
 }
+
+ 
 
 
 
@@ -99,41 +103,41 @@ function getEpisodesForClickedShow() {
 
 ///Now I have all the shows so need to  get access to  one show which user selected in select box.
 //sort the shows
+document.querySelector("#select-shows").addEventListener('change', (e) => {
+  const selectString = e.target.value;
+  console.log(selectString);
+  let selectedShow = getAllShows().filter((item) => {
 
-
-function selectShowsToGetEpisodes() {
-  document.querySelector("#select-shows").addEventListener('change', (e) => {
-    const selectString = e.target.value;
-    console.log(selectString);
-    let selectedShow = getAllShows().filter((item) => {
-
-      return (
-        item.name === selectString);
-    });
-
-    let idOfShow = selectedShow.map(data => data.id);
-
-    //Now I have an access to a particular shows that user serlect from the select box so I need
-    //to go and fetch episodes of that selected show.
-
-    //fetch an api based on selcted show
-    fetch(`https://api.tvmaze.com/shows/${idOfShow}/episodes`)
-      .then((response) => response.json())
-      .then((episodesOfShow) => {
-        displayEpisodes(episodesOfShow);
-        searchEpisodes(episodesOfShow);
-        populateEpisodes(episodesOfShow);
-        selectEpisodesToDisplay(episodesOfShow);
-        goBackToAllEpisodesFunction(episodesOfShow);
-
-
-      });
+    return (
+      item.name === selectString);
   });
+  let idOfShow = selectedShow.map(data => data.id);
+});
+function selectShowsToGetEpisodes(id) {
+  
+  
+  //Now I have an access to a particular shows that user serlect from the select box so I need
+  //to go and fetch episodes of that selected show.
+
+  //fetch an api based on selcted show
+  fetch(`https://api.tvmaze.com/shows/${id}/episodes`)
+    .then((response) => response.json())
+    .then((episodesOfShow) => {
+      displayEpisodes(episodesOfShow);
+      searchEpisodes(episodesOfShow);
+      populateEpisodes(episodesOfShow);
+      selectEpisodesToDisplay(episodesOfShow);
+      goBackToAllEpisodesFunction(episodesOfShow);
 
 
-
+    });
+  
 }
 
+
+
+
+selectShowsToGetEpisodes();
 //implement the search functionality for the selected shows episodes
 function searchEpisodes(episodes) {
   if (episodes !== null) {
@@ -249,27 +253,6 @@ const rootElem = document.getElementById("root");
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-//****   All function calling functionality  *******/
-
-selectShowsToGetEpisodes();
-populateShows();
-searchEpisodes();
-selectEpisodesToDisplay();
-goBackToAllEpisodesFunction();
-makePageForEpisodes();
-populateEpisodes();
-displayShowsWhenNameClicked();
 
 
 

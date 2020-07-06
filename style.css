@@ -344,6 +344,9 @@ color:var(--clear-gold);
   box-shadow: 0 0.4rem 1.4rem 0 rgba(86, 185, 235, 0.5);
   }
 
+  .show-button{
+    background-color: var(--clr-gold);
+  }
   #select-shows > option{
     font-family: var(--ff-primary);
     color: var(--clr-grey-3);
