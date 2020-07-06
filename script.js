@@ -112,6 +112,17 @@ document.querySelector("#select-shows").addEventListener('change', (e) => {
       item.name === selectString);
   });
   let idOfShow = selectedShow.map(data => data.id);
+  fetch(`https://api.tvmaze.com/shows/${idOfShow}/episodes`)
+    .then((response) => response.json())
+    .then((episodesOfShow) => {
+      displayEpisodes(episodesOfShow);
+      searchEpisodes(episodesOfShow);
+      populateEpisodes(episodesOfShow);
+      selectEpisodesToDisplay(episodesOfShow);
+      goBackToAllEpisodesFunction(episodesOfShow);
+
+
+    });
 });
 function selectShowsToGetEpisodes(id) {
   
