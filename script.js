@@ -111,22 +111,29 @@ function getEpisodesForClickedShow() {
 }
 //Now I have access to particular show id I am going to go 
 //and fetch api of episodes of that show.
-async function getEpisodesAcordingToShow(id){
-
+//const loadShows =  async () =>
+//async function getEpisodesAcordingToShow(id){
+const getEpisodesAcordingToShow= async (id)=>{
 
   //Now I have an access to a particular shows that user serlect from the select box so I need
   //to go and fetch episodes of that selected show.
 
   //fetch an api based on selcted show
-  const res = await fetch(`https://api.tvmaze.com/shows/${id}/episodes`)
-  allEpisodes = await res.json()
-    .then((episodesOfShow) => {
-      displayEpisodes(episodesOfShow);
-      populateEpisodes(episodesOfShow);
-      searchEpisodes(episodesOfShow);
-      
+  try {
+    const res = await fetch(`https://api.tvmaze.com/shows/${id}/episodes`);
+    allEpisodes = await res.json();
+    
+    displayEpisodes(allEpisodes);
+    populateEpisodes(allEpisodes);
+    searchEpisodes(allEpisodes);
+    selectEpisodesFromDropdown(episodesOfShow);
+  }
+  catch (err)
+  {
+    console.log(err.error);
+  }
      
-    });
+    
 }
 
 function displayEpisodes(episodes) {
@@ -213,20 +220,22 @@ function populateEpisodes(allEpisodes) {
 }
 
 
-  document.querySelector("#select-episode").addEventListener('change', (e) => {
-    const selectString = e.target.value;
-    console.log(selectString);
-    const selectedEpisodes = allEpisodes.filter((item) => {
-      return (
-        `S${item.season.toString().padStart(2, 0)}E${item.number.toString().padStart(2, 0)}-${item.name}` === selectString
-
-      );
-    });
-    displayEpisodes(selectedEpisodes);
-
-
-
+document.querySelector("#select-episode").addEventListener('change', selectEpisodesFromDropdown)
+function selectEpisodesFromDropdown() {
+  const selectString = selectEpisodes.value;
+  console.log(selectString);
+ // console.log('all episodes from selectbox',allEpisodes);
+   
+  const selectedEpisodes = allEpisodes.filter((item) => {
+    return (`S${item.season.toString().padStart(2, 0)}E${item.number.toString().padStart(2, 0)}-${item.name}` ===selectString)
+    
   });
+  console.log(selectedEpisodes);
+  displayEpisodes(selectedEpisodes);
+
+}
+
+
 
 
 
