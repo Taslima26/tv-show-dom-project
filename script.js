@@ -35,6 +35,10 @@ window.onload = loadShows;
 function displayShows(Shows) {
   
   let displayShow = Shows.map((item) => {
+    let showsBeingDisplay = Shows.length;
+    let total = document.querySelector(".total-2")
+    total.textContent = showsBeingDisplay;
+
     return `<article class='show-item'>
            <header>
            <h4> <button class='show-button' id='${item.id}'>${item.name}</button></h4>
@@ -74,7 +78,9 @@ searchBar1.addEventListener('keyup', (e) => {
 
   const searchString = e.target.value.toLowerCase();
  
-  
+  let totalShows = allShows.length;
+  let total = document.querySelector(".total-1");
+  total.textContent = totalShows;
   const filteredShows = allShows.filter((item) => {
     return (
       item.name.toLowerCase().includes(searchString) ||
@@ -90,6 +96,11 @@ searchBar1.addEventListener('keyup', (e) => {
 getBackToAllShows.addEventListener('click', () => {
   displayShows(allShows);
 })
+
+goBackToAllEpisodes.addEventListener('click', () => {
+  displayEpisodes(allEpisodes);
+})
+
 
 //when user click on a show name it should get all the episodes for that particular shows.
 
@@ -222,6 +233,7 @@ function populateEpisodes(allEpisodes) {
 
 document.querySelector("#select-episode").addEventListener('change', selectEpisodesFromDropdown)
 function selectEpisodesFromDropdown() {
+
   const selectString = selectEpisodes.value;
   console.log(selectString);
  // console.log('all episodes from selectbox',allEpisodes);
@@ -231,6 +243,7 @@ function selectEpisodesFromDropdown() {
     
   });
   console.log(selectedEpisodes);
+
   displayEpisodes(selectedEpisodes);
 
 }
@@ -247,6 +260,9 @@ searchBar.addEventListener('keyup', searchEpisodes)
 function searchEpisodes() {
   const searchString = searchBar.value.toLowerCase();
   console.log(searchString);
+  let totalEpisodes = allEpisodes.length;
+  let total = document.querySelector(".total-1");
+  total.textContent = totalEpisodes;
 
   
   const filteredEpisodes = allEpisodes.filter((item) => {
