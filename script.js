@@ -242,19 +242,24 @@ function selectEpisodesFromDropdown() {
 //search episodes functionality
 
 
-function searchEpisodes(allEpisodes) {
-  searchBar.addEventListener('keyup', (e) => {
-    const searchString = e.target.value;
-    console.log(searchString);
-    const filteredEpisodes = allEpisodes.filter((episode) => {
-      return (episode.name.toLowerCase().includes = searchString ||
-        episode.summary.toLowerCase().includes(searchString));
+
+searchBar.addEventListener('keyup', searchEpisodes)
+function searchEpisodes() {
+  const searchString = searchBar.value.toLowerCase();
+  console.log(searchString);
+
   
-    })
-    displayEpisodes(filteredEpisodes);
-    
+  const filteredEpisodes = allEpisodes.filter((item) => {
+    return (
+      item.name.toLowerCase().includes(searchString) ||
+      item.summary.toLowerCase().includes(searchString)
+    );
   });
-}
+  displayEpisodes(filteredEpisodes);
+}  
+
+
+
   
 
 
