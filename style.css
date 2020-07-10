@@ -518,6 +518,11 @@ a:link{
           width: 83%;
           font-size: var(--clr-primary-4);
         }
+
+        #searchBar-1{
+          width: 83%;
+          font-size: var(--clr-primary-4);
+        }
         
     }
 @media screen and  (max-width:640px) {

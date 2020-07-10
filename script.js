@@ -3,12 +3,12 @@ let imageHolder = document.querySelector(".photo")
 let subtitleHolder = document.querySelector('.episode-code');
 let descriptionHolder = document.querySelector('.item-text');
 let sectionCenter = document.querySelector('.section-center');
-let searchBar = document.querySelector("#searchBar");
+let episodesSearchBar = document.querySelector("#searchBar");
 let selectEpisodes = document.querySelector("#select-episode");
 let goBackToAllEpisodes = document.querySelector(".go-back-to-all-episodes");
 let getBackToAllShows=document.querySelector('.go-back-to-all-shows');
 let selectShows = document.querySelector("#select-shows")
-searchBar1 = document.querySelector('#searchBar-1')
+showSearchBar = document.querySelector('#searchBar-1')
 
 
 let allShows = [];
@@ -21,6 +21,7 @@ const loadShows =  async () => {
     const res=await fetch(`https://api.tvmaze.com/shows`)
     allShows = await res.json();
     displayShows(allShows);
+    
     
   }
   catch (err) {
@@ -67,6 +68,8 @@ function displayShows(Shows) {
   displayShow = displayShow.join('');
   sectionCenter.innerHTML = displayShow;
   getEpisodesForClickedShow();
+  hideEpisodesFunctionalit();
+  showShowsFunctionality();
 
 
 };
@@ -74,7 +77,7 @@ function displayShows(Shows) {
 
 //search shows functionality 
 
-searchBar1.addEventListener('keyup', (e) => {
+showSearchBar.addEventListener('keyup', (e) => {
 
   const searchString = e.target.value.toLowerCase();
  
@@ -112,12 +115,16 @@ function getEpisodesForClickedShow() {
     button.addEventListener("click", (e) => {
       
       getEpisodesAcordingToShow(e.target.id);
+      showEpisodesFunctionality();
+      hideShowFunctionality();
       
 
     });
-   
+    
 
   });
+ 
+ 
 
 }
 //Now I have access to particular show id I am going to go 
@@ -207,6 +214,8 @@ document.querySelector("#select-shows").addEventListener('change', (e) => {
   //This will go and get all the episodes for the chosen show;
   console.log('result when i calll function with id',getEpisodesAcordingToShow(idOfShow));
  // populateEpisodes(episodesForSelectBox);
+  hideShowFunctionality();
+  showEpisodesFunctionality();
 });
 
 
@@ -256,9 +265,9 @@ function selectEpisodesFromDropdown() {
 
 
 
-searchBar.addEventListener('keyup', searchEpisodes)
+episodesSearchBar.addEventListener('keyup', searchEpisodes)
 function searchEpisodes() {
-  const searchString = searchBar.value.toLowerCase();
+  const searchString = episodesSearchBar.value.toLowerCase();
   console.log(searchString);
   let totalEpisodes = allEpisodes.length;
   let total = document.querySelector(".total-1");
@@ -274,10 +283,26 @@ function searchEpisodes() {
   displayEpisodes(filteredEpisodes);
 }  
 
+function showEpisodesFunctionality() {
+  episodesSearchBar.style.display = '';
+  selectEpisodes.style.display = '';
+}
+
+function hideEpisodesFunctionalit() {
+  episodesSearchBar.style.display = 'none';
+  selectEpisodes.style.display = 'none';
+}
 
 
-  
+function showShowsFunctionality() {
+  showSearchBar.style.display = '';
+  selectShows.style.display = '';
+}
 
+function hideShowFunctionality() {
+  selectShows.style.display = 'none';
+  showSearchBar.style.display = 'none';
+}
 
 
 
